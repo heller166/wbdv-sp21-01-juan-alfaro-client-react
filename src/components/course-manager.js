@@ -1,11 +1,13 @@
 import React from 'react'
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
-import {Link, Route} from "react-router-dom";
+import CourseNavbar from "./course-nav-bar";
+import {Route} from "react-router-dom";
 import courseService from "../services/course-service";
 
 export default class CourseManager
     extends React.Component {
+
     state = {
         courses: []
     }
@@ -41,29 +43,22 @@ export default class CourseManager
             })
     }
 
-    addCourse = () => {
-        const newCourse = {
-            title: "New Course",
-            owner: "me",
-            lastModified: "2/10/2021"
-        }
+    addCourse = (newCourse) => {
         courseService.createCourse(newCourse)
-            .then(actualCourse => {
-                this.state.courses.push(actualCourse)
-                this.setState(this.state)
-            })
+            .then(course => this.setState(
+                (prevState) => ({
+                    ...prevState,
+                    courses: [
+                        ...prevState.courses,
+                        course
+                    ]
+                })))
     }
 
     render() {
         return (
             <div>
-                <Link to="/">
-                    <i className="fas fa-2x fa-home float-right"/>
-                </Link>
-                <h1>Course Manager</h1>
-                <button onClick={this.addCourse}>
-                    Add Course
-                </button>
+                <CourseNavbar addCourse={this.addCourse}/>
                 <Route path="/courses/table" exact={true}>
                     <CourseTable
                         updateCourse={this.updateCourse}
@@ -71,7 +66,10 @@ export default class CourseManager
                         courses={this.state.courses}/>
                 </Route>
                 <Route path="/courses/grid" exact={true}>
-                    <CourseGrid courses={this.state.courses}/>
+                    <CourseGrid
+                        updateCourse={this.updateCourse}
+                        deleteCourse={this.deleteCourse}
+                        courses={this.state.courses}/>
                 </Route>
             </div>
         )
