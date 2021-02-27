@@ -1,32 +1,39 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import CourseCard from './course-card'
 
-const CourseGrid = ({courses}) =>
+const CourseGrid = ({courses, updateCourse, deleteCourse}) =>
     <div>
-        <Link to="/courses/table">
-            <i className="fas fa-2x fa-list float-right"/>
-        </Link>
-        <h2>Course Grid {courses.length}</h2>
+        <div className="navbar">
+            <div className="container">
+                <div className="col d-none d-md-block">
+                    <h5>Recent Documents</h5>
+                </div>
+                <div className="col d-none d-md-block">
+                    <h5>
+                        Owned by Juanito
+                        <i className="fa fa-sort-down mx-2"/>
+                    </h5>
+                </div>
+                <div className="col">
+                    <Link to="/courses/table">
+                        <i className="fas fa-2x fa-list float-right mx-2"/>
+                    </Link>
+                    <i className="fas fa-2x fa-sort-alpha-down-alt float-right mx-2"/>
+                    <i className="fas fa-2x fa-folder float-right mx-2"/>
+                </div>
+            </div>
+        </div>
         <div className="row">
             {
                 courses.map(course =>
-                    <div className="card" style={{width: "18rem", margin: "15px"}}>
-                        <img src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png"
-                             className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">{course.title}</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the
-                                bulk of
-                                the card's content.</p>
-                            <Link to="/editor" className="btn btn-primary">
-                                Go somewhere
-                            </Link>
-                        </div>
-                    </div>
-                )
+                    <CourseCard
+                        course={course}
+                        updateCourse={updateCourse}
+                        deleteCourse={deleteCourse}
+                    />)
             }
         </div>
-
     </div>
 
 export default CourseGrid
