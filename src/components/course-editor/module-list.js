@@ -37,7 +37,7 @@ const ModuleList = (
                     </li>
                 )
             }
-            <li className="list-group-item" key={courseId}>
+            <li className="list-group-item">
                 <i onClick={() => createModule(courseId)} className="fas fa-plus fa-2x"/>
             </li>
         </ul>

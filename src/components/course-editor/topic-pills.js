@@ -29,7 +29,7 @@ const TopicPills = (
                     </li>
                 )
             }
-            <li className="list-group-item" key={lessonId}>
+            <li className="list-group-item">
                 <i onClick={() => createTopic(lessonId)} className="fas fa-plus fa-2x"/>
             </li>
         </ul>

@@ -29,7 +29,7 @@ const LessonTabs = (
                     </li>
                 )
             }
-            <li className="list-group-item" key={moduleId}>
+            <li className="list-group-item">
                 <i onClick={() => createLesson(moduleId)} className="fas fa-plus fa-2x"/>
             </li>
         </ul>
