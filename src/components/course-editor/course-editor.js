@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, useParams, useHistory} from "react-router-dom";
+import {Link, useParams, useHistory, Route} from "react-router-dom";
 import moduleReducer from "../../reducers/module-reducer";
 import lessonReducer from "../../reducers/lesson-reducer";
 import {combineReducers, createStore} from "redux";
@@ -19,7 +19,7 @@ const store = createStore(reducer,
     // Redux extension debugging
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const CourseEditor = ({history, params}) => {
+const CourseEditor = ({editorPaths, history, params}) => {
     const {layout, courseId, moduleId, lessonId} = useParams();
     return (
         <Provider store={store}>
@@ -36,16 +36,18 @@ const CourseEditor = ({history, params}) => {
                     <ModuleList/>
                 </div>
                 <div className="col-9">
-                    {
-                        moduleId !== undefined ?
-                            <LessonTabs/> : <></>
-                    }
-                    {
-                        lessonId !== undefined ?
-                            <TopicPills/> : <></>
-                    }
+                    <Route path={[
+                        editorPaths.modulesPath,
+                        editorPaths.lessonsPath,
+                        editorPaths.topicsPath]} exact={true}>
+                        <LessonTabs/>
+                    </Route>
+                    <Route path={[
+                        editorPaths.lessonsPath,
+                        editorPaths.topicsPath]} exact={true}>
+                        <TopicPills/>
+                    </Route>
                 </div>
-
             </div>
         </Provider>)
 }
