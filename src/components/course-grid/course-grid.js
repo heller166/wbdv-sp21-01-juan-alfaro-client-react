@@ -31,6 +31,7 @@ const CourseGrid = ({courses, updateCourse, deleteCourse}) =>
                         course={course}
                         updateCourse={updateCourse}
                         deleteCourse={deleteCourse}
+                        key={course._id}
                     />)
             }
         </div>
