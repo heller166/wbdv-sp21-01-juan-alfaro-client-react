@@ -1,4 +1,5 @@
-const COURSES_URL = "https://wbdv-generic-server.herokuapp.com/api/alfaro.j2/courses";
+export const NEU_USERNAME = "alfaro.j3"
+const COURSES_URL = `https://wbdv-generic-server.herokuapp.com/api/${NEU_USERNAME}/courses`;
 
 export const findAllCourses = () =>
     fetch(COURSES_URL)
