@@ -58,7 +58,9 @@ export default class CourseManager
     render() {
         return (
             <div>
-                <CourseNavbar addCourse={this.addCourse}/>
+                <Route path={["/courses/table", "/courses/grid"]} exact={true}>
+                    <CourseNavbar addCourse={this.addCourse}/>
+                </Route>
                 <Route path="/courses/table" exact={true}>
                     <CourseTable
                         updateCourse={this.updateCourse}
