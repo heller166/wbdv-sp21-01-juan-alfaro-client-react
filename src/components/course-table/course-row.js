@@ -29,16 +29,15 @@ const CourseRow = (
             <td>
                 {
                     !editing &&
-                    <Link to="/editor">
+                    <Link to={`/courses/table/edit/${course._id}`}>
                         {course.title}
                     </Link>
                 }
                 {
                     editing &&
-                    <input
-                        className="form-control"
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}/>
+                    <input className="form-control"
+                           onChange={(e) => setTitle(e.target.value)}
+                           value={title}/>
                 }
             </td>
             <td className="d-none d-md-table-cell">{course.owner}</td>
@@ -46,14 +45,17 @@ const CourseRow = (
             <td>
                 {
                     editing &&
-                    <span>
-                        <i onClick={() => saveCourse()} className="fas fa-2x fa-check"/>
-                        <i onClick={() => removeCourse(course)} className="fas fa-2x fa-trash mx-2"/>
-                    </span>
+                    <>
+                        <i onClick={() => saveCourse()}
+                           className="fas fa-2x fa-check"/>
+                        <i onClick={() => removeCourse(course)}
+                           className="fas fa-2x fa-trash mx-2"/>
+                    </>
                 }
                 {
                     !editing &&
-                    <i onClick={() => setEditing(true)} className="fas fa-2x fa-edit mx-2"/>
+                    <i onClick={() => setEditing(true)}
+                       className="fas fa-2x fa-edit mx-2"/>
                 }
             </td>
         </tr>)
