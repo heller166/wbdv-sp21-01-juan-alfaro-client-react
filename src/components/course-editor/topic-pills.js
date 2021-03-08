@@ -12,18 +12,17 @@ const TopicPills = (
         deleteTopic,
         findTopicsForLesson
     }) => {
-    const {layout, courseId, moduleId, lessonId, topicId} = useParams();
+    const {layout, courseId, moduleId, lessonId} = useParams();
     useEffect(() => {
         findTopicsForLesson(lessonId)
     }, [lessonId])
     return(<div>
-        <h2>Topic Pills</h2>
         <ul className="nav nav-pills">
             {
                 topics.map(topic =>
                     <li className="nav-item" key={topic._id}>
                         <EditableItem
-                            to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lesson/${lessonId}/topics/${topic._id}`}
+                            to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}
                             deleteItem={deleteTopic}
                             updateItem={updateTopic}
                             item={topic}/>
@@ -47,11 +46,11 @@ const dtpm = (dispatch) => ({
     },
     updateTopic: (newItem) => {
         topicService.updateTopic(newItem._id, newItem)
-            .then(status => dispatch({type: "UPDATE_TOPIC", updateTopic: newItem}))
+            .then(() => dispatch({type: "UPDATE_TOPIC", updateTopic: newItem}))
     },
     deleteTopic: (topicToDelete) => {
         topicService.deleteTopic(topicToDelete._id)
-            .then(status => dispatch({type: "DELETE_TOPIC", topicToDelete: topicToDelete}))
+            .then(() => dispatch({type: "DELETE_TOPIC", topicToDelete: topicToDelete}))
     },
     findTopicsForLesson: (moduleId) => {
         topicService.findTopicsForLesson(moduleId)

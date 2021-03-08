@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {connect, Provider} from "react-redux";
+import {connect} from "react-redux";
 import EditableItem from "../editable-item";
 import {useParams} from "react-router-dom";
 // import {findModulesForCourse, createModule} from "../services/module-service";
@@ -18,7 +18,6 @@ const ModuleList = (
         findModulesForCourse(courseId)
     }, [courseId])
     return (<div>
-        <h2>Module List</h2>
         <ul>
             <li>layout: {layout}</li>
             <li>courseId: {courseId}</li>
@@ -26,8 +25,6 @@ const ModuleList = (
             <li>lessonId: {lessonId}</li>
             <li>topicId: {topicId}</li>
         </ul>
-
-
         <ul className="list-group">
             {
                 modules.map(module =>
@@ -59,11 +56,11 @@ const dtpm = (dispatch) => ({
     },
     updateModule: (newItem) => {
         moduleService.updateModule(newItem._id, newItem)
-            .then(status => dispatch({type: "UPDATE_MODULE", updateModule: newItem}))
+            .then(() => dispatch({type: "UPDATE_MODULE", updateModule: newItem}))
     },
     deleteModule: (moduleToDelete) => {
         moduleService.deleteModule(moduleToDelete._id)
-            .then(status => dispatch({type: "DELETE_MODULE", moduleToDelete: moduleToDelete}))
+            .then(() => dispatch({type: "DELETE_MODULE", moduleToDelete: moduleToDelete}))
     },
     findModulesForCourse: (courseId) => {
         moduleService.findModulesForCourse(courseId)

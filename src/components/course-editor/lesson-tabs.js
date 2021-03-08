@@ -12,12 +12,11 @@ const LessonTabs = (
         deleteLesson,
         findLessonsForModule
     }) => {
-    const {layout, courseId, moduleId, lessonId} = useParams();
+    const {layout, courseId, moduleId} = useParams();
     useEffect(() => {
         findLessonsForModule(moduleId)
     }, [moduleId])
     return(<div>
-        <h2>Lesson Tabs</h2>
         <ul className="nav nav-tabs">
             {
                 lessons.map(lesson =>
@@ -47,11 +46,11 @@ const dtpm = (dispatch) => ({
     },
     updateLesson: (newItem) => {
         lessonService.updateLesson(newItem._id, newItem)
-            .then(status => dispatch({type: "UPDATE_LESSON", updateLesson: newItem}))
+            .then(() => dispatch({type: "UPDATE_LESSON", updateLesson: newItem}))
     },
     deleteLesson: (lessonToDelete) => {
         lessonService.deleteLesson(lessonToDelete._id)
-            .then(status => dispatch({type: "DELETE_LESSON", lessonToDelete: lessonToDelete}))
+            .then(() => dispatch({type: "DELETE_LESSON", lessonToDelete: lessonToDelete}))
     },
     findLessonsForModule: (moduleId) => {
         lessonService.findLessonsForModule(moduleId)
