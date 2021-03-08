@@ -1,5 +1,64 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import {Link, useParams, useHistory} from "react-router-dom";
+import moduleReducer from "../../reducers/module-reducer";
+import lessonReducer from "../../reducers/lesson-reducer";
+import {combineReducers, createStore} from "redux";
+import {Provider} from "react-redux";
+import ModuleList from "./module-list";
+import LessonTabs from "./lesson-tabs";
+import topicReducer from "../../reducers/topic-reducer";
+import TopicPills from "./topic-pills";
+
+const reducer = combineReducers({
+    moduleReducer: moduleReducer,
+    lessonReducer: lessonReducer,
+    topicReducer: topicReducer
+})
+
+const store = createStore(reducer,
+    // Redux extension debugging
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+const CourseEditor = ({history, params}) => {
+    const {layout, courseId, moduleId, lessonId} = useParams();
+    return (
+        <Provider store={store}>
+            <h1>
+                <Link to={`/courses/${layout}`}>
+                    <i className="fas fa-arrow-left"/>
+                </Link>
+                Course Editor
+                <i className="fas fa-times float-right"
+                   onClick={() => history.goBack()}/>
+            </h1>
+            <div className="row">
+                <div className="col-3">
+                    <ModuleList/>
+                </div>
+                <div className="col-9">
+                    {
+                        moduleId !== undefined ?
+                            <LessonTabs/> : <></>
+                    }
+                    {
+                        lessonId !== undefined ?
+                            <TopicPills/> : <></>
+                    }
+                </div>
+
+            </div>
+        </Provider>)
+}
+// const CourseEditor = () => {
+//   return (
+//     <h1>Course Editor</h1>
+//   )
+// }
+export default CourseEditor
+
+/*
+import React from 'react'
+import {Link, useHistory} from "react-router-dom";
 
 const CourseEditor = ({history}) =>
     <div className="container">
@@ -81,3 +140,4 @@ const CourseEditor = ({history}) =>
 
 
 export default CourseEditor
+*/
