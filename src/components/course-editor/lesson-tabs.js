@@ -29,8 +29,8 @@ const LessonTabs = (
                     </li>
                 )
             }
-            <li className="list-group-item">
-                <i onClick={() => createLesson(moduleId)} className="fas fa-plus fa-2x"/>
+            <li className="nav-item">
+                <FontAwesomeIcon icon="plus" pull="right" size="2x" onClick={() => createLesson(courseId)}/>
             </li>
         </ul>
     </div>)}

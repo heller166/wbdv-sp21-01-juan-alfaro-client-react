@@ -25,7 +25,7 @@ const CourseEditor = ({editorPaths, history, params}) => {
         <Provider store={store}>
             <h1>
                 <Link to={`/courses/${layout}`}>
-                    <i className="fas fa-arrow-left"/>
+                    <FontAwesomeIcon icon="arrow-left"/>
                 </Link>
                 Course Editor
                 <i className="fas fa-times float-right"

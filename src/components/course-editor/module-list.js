@@ -33,15 +33,17 @@ const ModuleList = (
                             to={`/courses/${layout}/edit/${courseId}/modules/${module._id}`}
                             deleteItem={deleteModule}
                             updateItem={updateModule}
-                            item={module}/>
-                    </li>
-                )
-            }
-            <li className="list-group-item">
-                <i onClick={() => createModule(courseId)} className="fas fa-plus fa-2x"/>
-            </li>
-        </ul>
-    </div>)
+                            item={module}
+                            linkClassName={"list-group-item list-group-item-action"}
+                            key={module._id}
+                        />
+                    )
+                }
+                <li className="list-group-item">
+                    <FontAwesomeIcon icon="plus" size="2x" onClick={() => createModule(courseId)}/>
+                </li>
+            </ul>
+        </div>)
 }
 
 const stpm = (state) => ({

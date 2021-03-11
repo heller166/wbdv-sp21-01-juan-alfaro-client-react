@@ -29,8 +29,8 @@ const TopicPills = (
                     </li>
                 )
             }
-            <li className="list-group-item">
-                <i onClick={() => createTopic(lessonId)} className="fas fa-plus fa-2x"/>
+            <li className="nav-item">
+                <FontAwesomeIcon icon="plus" pull="right" size="2x" onClick={() => createTopic(courseId)}/>
             </li>
         </ul>
     </div>)}

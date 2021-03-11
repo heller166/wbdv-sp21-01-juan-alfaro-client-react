@@ -15,10 +15,10 @@ const EditableItem = (
             {
                 !editing &&
                 <>
-                    <Link to={to}>
-                        {item.title}
-                    </Link>
-                    <i onClick={() => setEditing(true)} className="fas fa-edit"/>
+                    {item.title}
+                    <FontAwesomeIcon icon="edit" pull="right" size="lg" onClick={() => {
+                        setEditing(true)
+                    }}/>
                 </>
             }
             {
@@ -27,14 +27,14 @@ const EditableItem = (
                     <input
                         onChange={(e) => setItemCache({...itemCache, title: e.target.value})}
                         value={itemCache.title}/>
-                    <i onClick={() => {
+                    <FontAwesomeIcon icon="check" pull="right" size="lg" onClick={() => {
                         setEditing(false)
                         updateItem(itemCache)
-                    }} className="fas fa-check"/>
-                    <i onClick={() => {
+                    }}/>
+                    <FontAwesomeIcon icon="times" pull="right" size="lg" onClick={() => {
                         setEditing(false)
                         deleteItem(item)
-                    }} className="fas fa-times"/>
+                    }}/>
                 </>
             }
         </>
