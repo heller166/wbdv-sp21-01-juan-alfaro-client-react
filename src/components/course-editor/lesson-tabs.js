@@ -7,7 +7,7 @@ import lessonService from "../../services/lesson-service";
 
 const LessonTabs = (
     {
-        lessons=[],
+        lessons = [],
         createLesson,
         updateLesson,
         deleteLesson,

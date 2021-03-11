@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import {connect} from "react-redux";
 import EditableItem from "../editable-item";
 import {useParams} from "react-router-dom";
-// import {findModulesForCourse, createModule} from "../services/module-service";
 import moduleService from "../../services/module-service"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 

@@ -12,6 +12,13 @@ const EditableItem = (
     }) => {
     const [editing, setEditing] = useState(false)
     const [itemCache, setItemCache] = useState(item)
+
+    useEffect(() => {
+        if (window.location.pathname !== to) {
+            setEditing(false)
+        }
+    }, [window.location.pathname])
+
     return (
 
         <NavLink to={to} className={linkClassName} activeClassName="active">
@@ -40,7 +47,7 @@ const EditableItem = (
                     }}/>
                 </>
             }
-        </>
+        </NavLink>
     )
 }
 
