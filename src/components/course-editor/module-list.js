@@ -4,6 +4,7 @@ import EditableItem from "../editable-item";
 import {useParams} from "react-router-dom";
 // import {findModulesForCourse, createModule} from "../services/module-service";
 import moduleService from "../../services/module-service"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const ModuleList = (
     {
@@ -13,22 +14,15 @@ const ModuleList = (
         deleteModule,
         findModulesForCourse
     }) => {
-    const {layout, courseId, moduleId, lessonId, topicId} = useParams();
+    const {layout, courseId} = useParams();
     useEffect(() => {
         findModulesForCourse(courseId)
     }, [courseId])
-    return (<div>
-        <ul>
-            <li>layout: {layout}</li>
-            <li>courseId: {courseId}</li>
-            <li>moduleId: {moduleId}</li>
-            <li>lessonId: {lessonId}</li>
-            <li>topicId: {topicId}</li>
-        </ul>
-        <ul className="list-group">
-            {
-                modules.map(module =>
-                    <li className="list-group-item" key={module._id}>
+    return (
+        <div>
+            <ul className="list-group">
+                {
+                    modules.map(module =>
                         <EditableItem
                             to={`/courses/${layout}/edit/${courseId}/modules/${module._id}`}
                             deleteItem={deleteModule}

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import EditableItem from "../editable-item";
 import {useParams} from "react-router-dom";
 import lessonService from "../../services/lesson-service";
+ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const LessonTabs = (
     {
@@ -25,7 +26,9 @@ const LessonTabs = (
                             to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
                             deleteItem={deleteLesson}
                             updateItem={updateLesson}
-                            item={lesson}/>
+                            item={lesson}
+                            linkClassName={"nav-link"}
+                        />
                     </li>
                 )
             }
@@ -33,7 +36,8 @@ const LessonTabs = (
                 <FontAwesomeIcon icon="plus" pull="right" size="2x" onClick={() => createLesson(courseId)}/>
             </li>
         </ul>
-    </div>)}
+    </div>)
+}
 
 const stpm = (state) => ({
     lessons: state.lessonReducer.lessons

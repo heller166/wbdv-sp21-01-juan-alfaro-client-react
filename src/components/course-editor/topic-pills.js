@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import EditableItem from "../editable-item";
 import {useParams} from "react-router-dom";
 import topicService from "../../services/topic-service";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const TopicPills = (
     {
@@ -25,7 +26,9 @@ const TopicPills = (
                             to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}
                             deleteItem={deleteTopic}
                             updateItem={updateTopic}
-                            item={topic}/>
+                            item={topic}
+                            linkClassName={"nav-link"}
+                        />
                     </li>
                 )
             }

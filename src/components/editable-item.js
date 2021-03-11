@@ -1,17 +1,20 @@
-import React, {useState} from 'react'
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from 'react'
+import {NavLink} from "react-router-dom";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const EditableItem = (
     {
         to,
         item,
         updateItem,
-        deleteItem
+        deleteItem,
+        linkClassName
     }) => {
     const [editing, setEditing] = useState(false)
     const [itemCache, setItemCache] = useState(item)
     return (
-        <>
+
+        <NavLink to={to} className={linkClassName} activeClassName="active">
             {
                 !editing &&
                 <>
