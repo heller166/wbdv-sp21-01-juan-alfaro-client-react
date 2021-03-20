@@ -10,11 +10,14 @@ import topicReducer from "../../reducers/topic-reducer";
 import TopicPills from "./topic-pills";
 import courseService from '../../services/course-service'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import widgetReducer from "../../reducers/widget-reducer";
+import WidgetList from "../widgets/widget-list";
 
 const reducer = combineReducers({
     moduleReducer: moduleReducer,
     lessonReducer: lessonReducer,
-    topicReducer: topicReducer
+    topicReducer: topicReducer,
+    widgetReducer: widgetReducer
 })
 
 const store = createStore(reducer,
@@ -53,6 +56,10 @@ const CourseEditor = ({editorPaths}) => {
                         editorPaths.lessonsPath,
                         editorPaths.topicsPath]} exact={true}>
                         <TopicPills/>
+                    </Route>
+                    <Route path={[
+                        editorPaths.topicsPath]} exact={true}>
+                        <WidgetList/>
                     </Route>
                 </div>
             </div>
