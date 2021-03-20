@@ -12,15 +12,15 @@ export const createWidget = (dispatch, topicId) => {
             widget: theActualWidget
         }))
 }
-export const deleteWidget = (dispatch, item) =>
-    widgetService.deleteWidget(item._id)
+export const deleteWidget = (dispatch, widget) =>
+    widgetService.deleteWidget(widget.id)
         .then(status => dispatch({
             type: DELETE_WIDGET,
-            widgetToDelete: item
+            widgetToDelete: widget
         }))
 
 export const updateWidget = (dispatch, widget) =>
-    widgetService.updateWidget(widget._id, widget)
+    widgetService.updateWidget(widget.id, widget)
         .then(status => dispatch({
             type: UPDATE_WIDGET,
             widget

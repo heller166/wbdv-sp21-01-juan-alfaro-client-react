@@ -18,14 +18,14 @@ const widgetReducer = (state=initialState, action) => {
             return {
                 ...state,
                 widgets: state.widgets.filter(widget => {
-                    return widget._id !== action.widgetToDelete._id;
+                    return widget.id !== action.widgetToDelete.id;
                 })
             }
         case UPDATE_WIDGET:
             return {
                 ...state,
                 widgets: state.widgets.map(widget => {
-                    if(widget._id === action.widget._id) {
+                    if(widget.id === action.widget.id) {
                         return action.widget
                     } else {
                         return widget
