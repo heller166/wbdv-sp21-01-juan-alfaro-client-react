@@ -1,12 +1,24 @@
 import React from 'react';
 
-const ParagraphWidget = ({widget, editing}) => {
+const ParagraphWidget = ({widget, editing, editingWidget, setEditingWidget}) => {
     return (
         <>
             {
                 editing &&
                 <>
-                    <textarea value={widget.text} className="form-control"/>
+                    <select onChange={
+                        (e) => setEditingWidget({
+                            ...editingWidget, type: e.target.value
+                        })
+                    } value={editingWidget.type}>
+                        <option value={"PARAGRAPH"}>Paragraph</option>
+                        <option value={"HEADING"}>Heading</option>
+                    </select>
+                    <textarea onChange={
+                        (e) => setEditingWidget({
+                            ...editingWidget, text: e.target.value
+                        })
+                    } value={editingWidget.text} className="form-control"/>
                 </>
             }
             {
@@ -18,7 +30,6 @@ const ParagraphWidget = ({widget, editing}) => {
         </>
     )
 }
-
 
 
 export default ParagraphWidget;

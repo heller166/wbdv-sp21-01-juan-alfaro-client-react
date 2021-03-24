@@ -1,13 +1,29 @@
 import React from 'react'
 
-const HeadingWidget = ({widget, editing}) => {
-    return(
+const HeadingWidget = ({setEditingWidget, editingWidget, widget, editing}) => {
+    return (
         <>
             {
                 editing &&
                 <>
-                    <input value={widget.text} className="form-control"/>
-                    <select value={widget.size} className="form-control">
+                    <select onChange={
+                        (e) => setEditingWidget({
+                            ...editingWidget, type: e.target.value
+                        })
+                    } value={editingWidget.type} >
+                        <option value={"PARAGRAPH"}>Paragraph</option>
+                        <option value={"HEADING"}>Heading</option>
+                    </select>
+                    <input onChange={
+                        (e) => setEditingWidget({
+                            ...editingWidget, text: e.target.value
+                        })}
+                           value={editingWidget.text} className="form-control"/>
+                    <select onChange={
+                        (e) => setEditingWidget({
+                            ...editingWidget, size: +e.target.value
+                        })}
+                            value={editingWidget.size} className="form-control">
                         <option value={1}>Heading 1</option>
                         <option value={2}>Heading 2</option>
                         <option value={3}>Heading 3</option>

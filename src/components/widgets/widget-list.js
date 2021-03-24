@@ -17,13 +17,12 @@ const WidgetList = (
     const [editingWidget, setEditingWidget] = useState({});
 
     useEffect(() => {
-       findWidgetsForTopic(topicId)
+        findWidgetsForTopic(topicId)
     }, [topicId])
 
     return (
         <div>
-            <i onClick={createWidget} className="fas fa-plus fa-2x float-right"/>
-            <h2>Widget List ({widgets.length}) {editingWidget.id}</h2>
+            <i onClick={() => createWidget(topicId)} className="fas fa-plus fa-2x float-right"/>
             <ul className="list-group">
                 {
                     widgets.map(widget =>
@@ -32,33 +31,47 @@ const WidgetList = (
                                 editingWidget.id === widget.id &&
                                 <>
                                     <i onClick={() => {
-                                        updateWidget(widget.id, editingWidget)
+                                        updateWidget(editingWidget)
+                                        setEditingWidget({})
                                     }} className="fas fa-2x fa-check float-right"/>
-                                    <i onClick={() => deleteWidget(widget.id)}
-                                       className="fas fa-2x fa-trash float-right"/>
+                                    <i onClick={() => {
+                                        deleteWidget(editingWidget)
+                                        setEditingWidget({})
+                                    }} className="fas fa-2x fa-trash float-right"/>
                                 </>
                             }
                             {
                                 editingWidget.id !== widget.id &&
-                                <i onClick={() => setEditingWidget(widget)} className="fas fa-2x fa-cog float-right"/>
+                                <i onClick={() => setEditingWidget(widget)}
+                                   className="fas fa-2x fa-cog float-right"/>
                             }
                             {
-                                widget.type === "HEADING" &&
+                                ((widget.id === editingWidget.id && editingWidget.type === "PARAGRAPH")
+                                    ||
+                                    (widget.id !== editingWidget.id && widget.type === "PARAGRAPH"))
+                                &&
                                 <HeadingWidget
                                     editing={editingWidget.id === widget.id}
+                                    editingWidget={editingWidget}
+                                    setEditingWidget={setEditingWidget}
                                     widget={widget}/>
+
                             }
                             {
-                                widget.type === "PARAGRAPH" &&
+                                ((widget.id === editingWidget.id && editingWidget.type === "HEADING")
+                                    ||
+                                    (widget.id !== editingWidget.id && widget.type === "HEADING"))
+                                &&
                                 <ParagraphWidget
                                     editing={editingWidget.id === widget.id}
+                                    editingWidget={editingWidget}
+                                    setEditingWidget={setEditingWidget}
                                     widget={widget}/>
                             }
                         </li>
                     )
                 }
             </ul>
-            {JSON.stringify(widgets)}
         </div>
     )
 }
@@ -70,7 +83,7 @@ const stpm = (state) => ({
 const dtpm = (dispatch) => {
     return {
         createWidget: (topicId) => widgetActions.createWidget(dispatch, topicId),
-        deleteWidget: (item) => widgetActions.deleteWidget(dispatch, item),
+        deleteWidget: (widget) => widgetActions.deleteWidget(dispatch, widget),
         updateWidget: (widget) => widgetActions.updateWidget(dispatch, widget),
         findWidgetsForTopic: (topicId) => widgetActions.findWidgetsForTopic(dispatch, topicId)
     }
@@ -79,3 +92,5 @@ const dtpm = (dispatch) => {
 
 
 export default connect(stpm, dtpm)(WidgetList);
+
+
