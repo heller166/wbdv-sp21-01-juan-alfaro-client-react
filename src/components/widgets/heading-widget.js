@@ -10,7 +10,9 @@ const HeadingWidget = ({setEditingWidget, editingWidget, widget, editing}) => {
                         (e) => setEditingWidget({
                             ...editingWidget, type: e.target.value
                         })
-                    } value={editingWidget.type} >
+                    } value={editingWidget.type}>
+                        <option value={"IMAGE"}>Image</option>
+                        <option value={"LIST"}>List</option>
                         <option value={"PARAGRAPH"}>Paragraph</option>
                         <option value={"HEADING"}>Heading</option>
                     </select>

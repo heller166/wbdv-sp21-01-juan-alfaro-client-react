@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from "react-redux"
+import ImageWidget from "./image-widget";
+import ListWidget from "./list-widget";
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom";
@@ -46,11 +48,22 @@ const WidgetList = (
                                    className="fas fa-2x fa-cog float-right"/>
                             }
                             {
-                                ((widget.id === editingWidget.id && editingWidget.type === "PARAGRAPH")
+                                ((widget.id === editingWidget.id && editingWidget.type === "LIST")
                                     ||
-                                    (widget.id !== editingWidget.id && widget.type === "PARAGRAPH"))
+                                    (widget.id !== editingWidget.id && widget.type === "LIST"))
                                 &&
-                                <HeadingWidget
+                                <ListWidget
+                                    editing={editingWidget.id === widget.id}
+                                    editingWidget={editingWidget}
+                                    setEditingWidget={setEditingWidget}
+                                    widget={widget}/>
+                            }
+                            {
+                                ((widget.id === editingWidget.id && editingWidget.type === "IMAGE")
+                                    ||
+                                    (widget.id !== editingWidget.id && widget.type === "IMAGE"))
+                                &&
+                                <ImageWidget
                                     editing={editingWidget.id === widget.id}
                                     editingWidget={editingWidget}
                                     setEditingWidget={setEditingWidget}
@@ -61,6 +74,18 @@ const WidgetList = (
                                 ((widget.id === editingWidget.id && editingWidget.type === "HEADING")
                                     ||
                                     (widget.id !== editingWidget.id && widget.type === "HEADING"))
+                                &&
+                                <HeadingWidget
+                                    editing={editingWidget.id === widget.id}
+                                    editingWidget={editingWidget}
+                                    setEditingWidget={setEditingWidget}
+                                    widget={widget}/>
+
+                            }
+                            {
+                                ((widget.id === editingWidget.id && editingWidget.type === "PARAGRAPH")
+                                    ||
+                                    (widget.id !== editingWidget.id && widget.type === "PARAGRAPH"))
                                 &&
                                 <ParagraphWidget
                                     editing={editingWidget.id === widget.id}
