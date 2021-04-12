@@ -23,6 +23,9 @@ export default class CourseTable extends React.Component {
                         <td className="d-none d-lg-table-cell">
                             <h5>Last Modified</h5>
                         </td>
+                        <td className="d-none d-lg-table-cell">
+                            <h5>Quizzes</h5>
+                        </td>
                         <td>
                             <i className="fas fa-2x fa-folder mx-2"/>
                             <i className="fas fa-2x fa-sort-alpha-up-alt mx-2"/>

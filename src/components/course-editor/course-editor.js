@@ -1,28 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams, Route} from "react-router-dom";
-import moduleReducer from "../../reducers/module-reducer";
-import lessonReducer from "../../reducers/lesson-reducer";
-import {combineReducers, createStore} from "redux";
-import {Provider} from "react-redux";
 import ModuleList from "./module-list";
 import LessonTabs from "./lesson-tabs";
-import topicReducer from "../../reducers/topic-reducer";
 import TopicPills from "./topic-pills";
 import courseService from '../../services/course-service'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import widgetReducer from "../../reducers/widget-reducer";
 import WidgetList from "../widgets/widget-list";
-
-const reducer = combineReducers({
-    moduleReducer: moduleReducer,
-    lessonReducer: lessonReducer,
-    topicReducer: topicReducer,
-    widgetReducer: widgetReducer
-})
-
-const store = createStore(reducer,
-    // Redux extension debugging
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const CourseEditor = ({editorPaths}) => {
     const {layout, courseId} = useParams();
@@ -34,7 +17,7 @@ const CourseEditor = ({editorPaths}) => {
     }, [courseId])
 
     return (
-        <Provider store={store}>
+        <>
             <h1>
                 <Link to={`/courses/${layout}`}>
                     <FontAwesomeIcon icon="arrow-left"/>
@@ -63,7 +46,7 @@ const CourseEditor = ({editorPaths}) => {
                     </Route>
                 </div>
             </div>
-        </Provider>)
+        </>)
 }
 
 export default CourseEditor

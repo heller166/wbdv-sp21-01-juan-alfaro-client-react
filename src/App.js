@@ -6,8 +6,33 @@ import Home from "./components/home"
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {fab} from '@fortawesome/free-brands-svg-icons';
 import {fas} from '@fortawesome/free-solid-svg-icons'
+import QuizzesList from "./components/quizzes/quizzes-list";
+import Quiz from "./components/quizzes/quiz";
+import {combineReducers, createStore} from "redux";
+import moduleReducer from "./reducers/module-reducer";
+import lessonReducer from "./reducers/lesson-reducer";
+import topicReducer from "./reducers/topic-reducer";
+import widgetReducer from "./reducers/widget-reducer";
+import questionReducer from "./reducers/question-reducer";
+import quizReducer from "./reducers/quiz-reducer";
+import {Provider} from "react-redux";
 
 library.add(fab, fas);
+
+
+const reducer = combineReducers({
+    moduleReducer: moduleReducer,
+    lessonReducer: lessonReducer,
+    topicReducer: topicReducer,
+    widgetReducer: widgetReducer,
+    questionReducer: questionReducer,
+    quizReducer: quizReducer
+})
+
+const store = createStore(reducer,
+    // Redux extension debugging
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
 
 function App() {
     const editorPaths = {
@@ -18,15 +43,19 @@ function App() {
     }
 
     return (
-        <BrowserRouter>
-            <div className="container-fluid">
-                <Route path="/" exact={true} component={Home}/>
-                <Route path="/courses" component={CourseManager}/>
-                <Route path={Object.values(editorPaths)}
-                       exact={true}
-                       render={(props) => <CourseEditor editorPaths={editorPaths} {...props}/>}/>
-            </div>
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <div className="container-fluid">
+                    <Route path="/" exact={true} component={Home}/>
+                    <Route path="/courses/:courseId/quizzes" component={QuizzesList}/>
+                    <Route path="/courses/:courseId/quizzes/:quizId" component={Quiz}/>
+                    <Route path="/courses" component={CourseManager}/>
+                    <Route path={Object.values(editorPaths)}
+                           exact={true}
+                           render={(props) => <CourseEditor editorPaths={editorPaths} {...props}/>}/>
+                </div>
+            </BrowserRouter>
+        </Provider>
     );
 }
 
