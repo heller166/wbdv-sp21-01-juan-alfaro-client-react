@@ -35,11 +35,11 @@ const MultipleChoiceQuestion = ({question}) => {
                     </>
                 }
             </h4>
-            <ul class="list-group">
+            <ul className="list-group">
                 {
                     question.choices.map((choice, index) => {
                         return (
-                            <li class={`list-group-item ${evaluateListStyle(choice)}`}
+                            <li className={`list-group-item ${evaluateListStyle(choice)}`}
                                 key={index}>
                                 <input onClick={() => {
                                     !graded && setAnswer(choice)

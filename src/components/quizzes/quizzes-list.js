@@ -16,7 +16,7 @@ const QuizzesList = (
     }, [courseId])
 
     return(
-        <div class="container">
+        <div className="container">
             <h2>Quizzes</h2>
             <div className="list-group col-6">
                 {

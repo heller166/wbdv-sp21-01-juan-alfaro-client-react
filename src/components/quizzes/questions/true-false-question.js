@@ -35,7 +35,7 @@ const TrueFalseQuestion = ({question}) => {
                     </>
                 }
             </h4>
-            <ul class="list-group">
+            <ul className="list-group">
                 <li className={`list-group-item ${evaluateListStyle("true")}`}>
                     <input onClick={() => {
                         !graded && setAnswer("true")

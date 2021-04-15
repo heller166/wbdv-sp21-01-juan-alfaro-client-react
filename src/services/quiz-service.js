@@ -1,4 +1,4 @@
-const QUIZZES_URL = 'http://localhost:3000/api/quizzes';
+const QUIZZES_URL = 'https://wbdv-sp21-01-juan-alfaro-serve.herokuapp.com/api/quizzes';
 
 const findAllQuizzes = () => {
     return fetch(QUIZZES_URL)

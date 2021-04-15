@@ -25,12 +25,12 @@ const Quiz = (
     },[quizId])
 
     return(
-        <div class="container">
+        <div className="container">
             <h2>{quiz.title}</h2>
-            <ul class="list-group col-8">
+            <ul className="list-group col-8">
                 {
                     questions.map((question) =>
-                        <li key={question._id} class="list-group-item">
+                        <li key={question._id} className="list-group-item">
                             <Question question={question}/>
                         </li>
                     )
