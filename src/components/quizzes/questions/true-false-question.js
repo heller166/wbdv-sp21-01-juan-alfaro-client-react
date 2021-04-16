@@ -1,20 +1,23 @@
-import React, {useState} from "react";
+import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const TrueFalseQuestion = ({question}) => {
-    const [answer, setAnswer] = useState("")
-    const [graded, setGraded] = useState(false)
+const TrueFalseQuestion = ({question, updateQuestion, graded}) => {
 
     const evaluateListStyle = (choice) => {
-        if(graded) {
+        if (graded) {
             if (choice === question.correct) {
                 return "list-group-item-success"
-            } else if (choice === answer){
+            } else if (choice === question.answer) {
                 return "list-group-item-danger"
             } else {
                 return ""
             }
         }
+    }
+
+    const setAnswer = (answer) => {
+        question.answer = answer
+        updateQuestion(answer)
     }
 
     return (
@@ -25,11 +28,11 @@ const TrueFalseQuestion = ({question}) => {
                     graded &&
                     <>
                         {
-                            answer === question.correct &&
+                            question.answer === question.correct &&
                             <FontAwesomeIcon icon="check" color="green" pull="right"/>
                         }
                         {
-                            answer !== question.correct &&
+                            question.answer !== question.correct &&
                             <FontAwesomeIcon icon="times" color="red" pull="right"/>
                         }
                     </>
@@ -62,11 +65,7 @@ const TrueFalseQuestion = ({question}) => {
                 </li>
             </ul>
             <br/>
-            <p>{`Your answer: ${answer}`}</p>
-            <button onClick={
-                () => setGraded(true)
-            } type="button" className="btn btn-success">Grade
-            </button>
+            <p>{`Your answer: ${question.answer}`}</p>
         </div>
     )
 }

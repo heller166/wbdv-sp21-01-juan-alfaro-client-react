@@ -1,6 +1,7 @@
 import questionService from '../services/question-service'
 
 export const FIND_QUESTIONS_FOR_QUIZ = "FIND_QUESTIONS_FOR_QUIZ"
+export const UPDATE_QUESTION = "UPDATE_QUESTION"
 
 export const findQuestionsForQuiz = (dispatch, quizId) =>
     questionService.findQuestionsForQuiz(quizId)
@@ -9,8 +10,15 @@ export const findQuestionsForQuiz = (dispatch, quizId) =>
             questions: theQuestions
         }))
 
+export const updateQuestion = (dispatch, question) =>
+    dispatch({
+        type: UPDATE_QUESTION,
+        question: question
+    })
+
 const questionActions = {
-    findQuestionsForQuiz
+    findQuestionsForQuiz,
+    updateQuestion
 }
 
 export default questionActions

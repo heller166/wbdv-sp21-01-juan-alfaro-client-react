@@ -8,6 +8,7 @@ import {fab} from '@fortawesome/free-brands-svg-icons';
 import {fas} from '@fortawesome/free-solid-svg-icons'
 import QuizzesList from "./components/quizzes/quizzes-list";
 import Quiz from "./components/quizzes/quiz";
+import QuizAttempts from "./components/quizzes/quiz-attempts";
 import {combineReducers, createStore} from "redux";
 import moduleReducer from "./reducers/module-reducer";
 import lessonReducer from "./reducers/lesson-reducer";
@@ -16,6 +17,7 @@ import widgetReducer from "./reducers/widget-reducer";
 import questionReducer from "./reducers/question-reducer";
 import quizReducer from "./reducers/quiz-reducer";
 import {Provider} from "react-redux";
+import quizAttemptsReducer from "./reducers/quiz-attempt-reducer";
 
 library.add(fab, fas);
 
@@ -26,7 +28,8 @@ const reducer = combineReducers({
     topicReducer: topicReducer,
     widgetReducer: widgetReducer,
     questionReducer: questionReducer,
-    quizReducer: quizReducer
+    quizReducer: quizReducer,
+    quizAttemptsReducer: quizAttemptsReducer
 })
 
 const store = createStore(reducer,
@@ -48,7 +51,8 @@ function App() {
                 <div className="container-fluid">
                     <Route path="/" exact={true} component={Home}/>
                     <Route path="/courses/:courseId/quizzes" component={QuizzesList}/>
-                    <Route path="/courses/:courseId/quizzes/:quizId" component={Quiz}/>
+                    <Route path="/courses/:courseId/quizzes/:quizId" component={Quiz} exact={true}/>
+                    <Route path="/courses/:courseId/quizzes/:quizId/attempts" component={QuizAttempts}/>
                     <Route path="/courses" component={CourseManager}/>
                     <Route path={Object.values(editorPaths)}
                            exact={true}

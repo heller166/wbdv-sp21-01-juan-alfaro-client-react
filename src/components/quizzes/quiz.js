@@ -4,16 +4,20 @@ import Question from "./questions/question";
 import {connect} from "react-redux";
 import questionActions from "../../actions/question-actions";
 import quizActions from "../../actions/quiz-actions";
+import quizAttemptActions from "../../actions/quiz-attempts-actions";
 
 const Quiz = (
     {
         questions = [],
         quizzes = [],
         findQuestionsForQuiz,
-        findQuizById
+        findQuizById,
+        updateQuestion,
+        submitQuiz
     }) => {
     const {quizId} = useParams();
     const [quiz, setQuiz] = useState({title:""})
+    const [graded, setGraded] = useState(false)
 
     useEffect(() => {
         findQuestionsForQuiz(quizId)
@@ -31,11 +35,20 @@ const Quiz = (
                 {
                     questions.map((question) =>
                         <li key={question._id} className="list-group-item">
-                            <Question question={question}/>
+                            <Question question={question}
+                                      updateQuestion={updateQuestion}
+                                      graded={graded}/>
                         </li>
                     )
                 }
             </ul>
+            <button onClick={
+                () => {
+                    setGraded(true)
+                    submitQuiz(quizId, questions)
+                }
+            } type="button" className="btn btn-success">Submit
+            </button>
         </div>
     );
 }
@@ -48,7 +61,9 @@ const stpm = (state) => ({
 const dtpm = (dispatch) => {
     return {
         findQuestionsForQuiz: (quizId) => questionActions.findQuestionsForQuiz(dispatch, quizId),
-        findQuizById: (quizId) => quizActions.findQuizById(dispatch, quizId)
+        findQuizById: (quizId) => quizActions.findQuizById(dispatch, quizId),
+        updateQuestion: (question) => questionActions.updateQuestion(dispatch, question),
+        submitQuiz: (quizId, questions) => quizAttemptActions.createQuizAttempt(dispatch, quizId, questions)
     }
 }
 
